@@ -778,11 +778,10 @@ export default {
           label +
           ' ' +
           (deps.size > 1 ? 'dependencies' : 'dependency') +
-          ': ' +
-          joinEnglish(
-            Array.from(deps)
-              .sort()
-              .map(name => "'" + name + "'"),
+          ': ' +          
+          Array.from(deps)
+            .sort()
+            .join(', ')
           ) +
           `. Either ${fixVerb} ${
             deps.size > 1 ? 'them' : 'it'
@@ -1409,21 +1408,6 @@ function fastFindReferenceWithParent(start, target) {
   }
 
   return null;
-}
-
-function joinEnglish(arr) {
-  let s = '';
-  for (let i = 0; i < arr.length; i++) {
-    s += arr[i];
-    if (i === 0 && arr.length === 2) {
-      s += ' and ';
-    } else if (i === arr.length - 2 && arr.length > 2) {
-      s += ', and ';
-    } else if (i < arr.length - 1) {
-      s += ', ';
-    }
-  }
-  return s;
 }
 
 function isNodeLike(val) {
